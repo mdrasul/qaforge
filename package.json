@@ -1,0 +1,11 @@
+{
+  "name": "qaforge",
+  "version": "1.0.0",
+  "description": "QA AI Operating System — GitHub Copilot agent framework for end-to-end QA pipelines",
+  "keywords": ["qa", "testing", "github-copilot", "agents", "automation"],
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">=18"
+  }
+}
