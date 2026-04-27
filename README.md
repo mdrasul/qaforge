@@ -28,6 +28,8 @@ No manual handoffs. No context switching. No starting from scratch every sprint.
 
 ## The 90-Second Demo
 
+🎥 **[Watch the full 25-minute live demo on YouTube](https://youtu.be/o8rkB_uJlVk)** — end-to-end pipeline run on a live site, no cuts.
+
 ```
 You:     @QAForge Manager
          [paste your Jira story]
