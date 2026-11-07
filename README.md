@@ -32,46 +32,9 @@ Start with one story. Review the artifacts, correct assumptions and keep approva
 - **[Part 3 — Follow a practical QA workflow](https://youtu.be/EHITM9zFefI):** context preparation, story input, artifact review and browser validation using a sample application.
 - [Earlier extended demonstration](https://youtu.be/o8rkB_uJlVk): an older walkthrough; start with Parts 2 and 3 for the newer presentation.
 
-The following is an illustrative conversation, not an execution report or a promise of a particular number of scenarios or passing tests:
+**What Part 3 demonstrates:** In the TeamPortal sample, an engineer gives the AI Manager agent a sign-in rule, supplies a story and reviews the proposed test cases. The recording shows six browser checks against that sample, including access to the protected welcome page and what happens after logout. Those results apply to the recorded sample and run.
 
-```
-You:     @QAForge Manager
-         [paste your Jira story]
-
-Manager: Story understood. Folder created at FeatureSpecs/TICKET-123/.
-         Delegating to Story Analyst...
-
-Analyst: Analysis complete. 14 scenarios identified across 4 test suites.
-         Saved to 02_TEST_ANALYSIS.md.
-         ⏸ APPROVAL GATE — type APPROVE to continue.
-
-You:     APPROVE
-
-Generator: 23 BDD test cases written in Gherkin format.
-           P0: 8 cases | P1: 11 cases | P2: 4 cases.
-           ⏸ APPROVAL GATE
-
-You:     APPROVE
-
-Data Resolver: Live API called. 5 test scenarios resolved with real event IDs.
-               Saved to 04_TEST_DATA.md.
-               ⏸ APPROVAL GATE
-
-You:     APPROVE
-
-Automation Engineer: 5 Playwright spec files generated.
-                     POM updated with 3 new methods.
-                     All fixtures wired to resolved test data.
-                     ⏸ APPROVAL GATE
-
-You:     APPROVE → run the tests → come back
-
-Validator: 23/23 test cases mapped to ACs. 21 passing. 2 failing (P1 — non-blocking).
-           QA Sign-Off: CONDITIONAL PASS.
-
-Reporter:  Final report saved. Xray XML ready for Jira import.
-           ✅ COMPLETE.
-```
+**Try the same review on your story:** Open one generated test case. Find the source rule, read its expected result, and decide whether you would accept that behavior. If the expected result adds something the story never promised, ask the AI Manager agent to revise it before proceeding.
 
 ---
 
@@ -100,12 +63,12 @@ Reporter:  Final report saved. Xray XML ready for Jira import.
 
 ## Adapt the Workflow to Your Stack
 
-QAForge includes four skill packs. Review and configure the relevant pack for your environment before execution:
+QAForge includes the four instruction packs below. Their presence tells you where to start configuring a workflow; the Part 3 browser demo does not establish that your API, database or AWS integration works. Verify each integration with an authorized run in your environment:
 
 | Tech Stack | Use Case | Skill Pack |
 |-----------|----------|------------|
 | Playwright + TypeScript | Web UI testing | [`skills/playwright`](skills/playwright/README.md) |
-| REST API (any language) | API contract + integration testing | [`skills/api-rest`](skills/api-rest/README.md) |
+| REST API | API contract + integration testing | [`skills/api-rest`](skills/api-rest/README.md) |
 | PostgreSQL / MySQL / SQL Server | Direct DB verification + ETL validation | [`skills/database-sql`](skills/database-sql/README.md) |
 | AWS SQS + S3 + Lambda + DynamoDB | Cloud pipeline testing | [`skills/aws-cloud`](skills/aws-cloud/README.md) |
 
@@ -120,7 +83,7 @@ The **Core Engine** defines the shared workflow. The **Skill Layer** supplies st
 - Tools and permissions required by your chosen skill pack
 - For Node-based examples, check their package requirements and the runtime supported by the dependencies you install; the repository declares Node.js >= 18
 
-### Deploy in 3 Steps
+### Open Your QA Workspace in 3 Steps
 
 ```bash
 # 1. Clone QAForge — this becomes your QA workspace
@@ -179,7 +142,7 @@ qaforge/
 ├── .github/agents/          ← Custom agent definitions for Copilot
 ├── core/                    ← Templates and engine reference docs
 ├── skills/                  ← Skill pack docs and code templates
-├── examples/                ← Reference implementations per stack
+├── examples/                ← Sample projects and example artifacts
 └── docs/                    ← Full documentation
 ```
 
