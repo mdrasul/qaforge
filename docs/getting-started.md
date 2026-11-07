@@ -51,7 +51,7 @@ Open it and fill in:
 - Project name and team name
 - A 2–4 sentence description of your application
 - Your QA environment URLs
-- Test user credentials (or a reference to your vault)
+- An approved reference to your test-account vault; never paste passwords or tokens into the context file
 - Test management tool (leave blank if you don't use one)
 
 **This is the only file required to run your first story.**
@@ -118,7 +118,7 @@ The Manager will:
 2. Route to the Story Analyst
 3. Pause at each step with an **APPROVAL GATE** — type `APPROVE` to advance
 
-**Want to skip all gates?** Add `--ci` to your message to run the full cycle uninterrupted.
+**Keep approval gates enabled while adopting the workflow.** Inspect each artifact and request changes before proceeding. Prompt-based gates do not replace tool permissions or your organization's authorization controls.
 
 ---
 

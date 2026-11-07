@@ -1,34 +1,38 @@
 # QAForge
 
-> **The AI-powered QA operating system for any project, any tech stack.**
-> Built on GitHub Copilot. Deployed in 30 minutes. Scales to 1000+ engineers.
+> **AI-assisted QA. Engineer-led.**
+> A coordinated QA workflow in GitHub Copilot, grounded in your project context and guided by your review.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![VS Code](https://img.shields.io/badge/VS%20Code-GitHub%20Copilot-blue)](https://code.visualstudio.com/)
-[![Status: Beta](https://img.shields.io/badge/Status-Beta-orange)]()
+![Status: Beta](https://img.shields.io/badge/Status-Beta-orange)
 
 ---
 
 ## What Is QAForge?
 
-QAForge is a **multi-agent AI orchestration system** that automates the full QA lifecycle — from reading a Jira story to delivering running automated tests and audit-ready reports.
+QAForge is a **multi-agent QA workflow** that helps engineers turn a story and approved project context into analysis, test cases, test data plans, automation drafts and reports.
 
-You paste a story. Eight specialized AI agents collaborate, with your approval at every step, to:
+An **AI Manager agent** coordinates specialist agents. Depending on your scope and configured tools, they can help you:
 
-1. **Analyse** the story and identify every test scenario
-2. **Write** structured BDD/Gherkin test cases (Xray-ready)
-3. **Resolve** real, live test data for each scenario
-4. **Generate** production-ready automated test code
-5. **Validate** coverage against every acceptance criterion
-6. **Report** results with a final stakeholder report + Jira import
+1. **Analyse** a story and propose scenarios and coverage gaps
+2. **Write** structured test cases for your review
+3. **Resolve** test data using authorized sources, or identify missing data
+4. **Draft** automation adapted to your framework for review and execution
+5. **Validate** acceptance-criteria coverage against available evidence
+6. **Report** results, limitations and follow-up work
 
-No manual handoffs. No context switching. No starting from scratch every sprint.
+Start with one story. Review the artifacts, correct assumptions and keep approval gates enabled. Generated code is not a passing test; execution evidence and engineering judgment determine the result.
 
 ---
 
-## The 90-Second Demo
+## Watch QAForge in Action
 
-🎥 **[Watch the full 25-minute live demo on YouTube](https://youtu.be/o8rkB_uJlVk)** — end-to-end pipeline run on a live site, no cuts.
+- **[Part 2 — Meet your AI QA team](https://youtu.be/XAoT-4p5e8U):** an introduction to the agents, project context and human approval workflow.
+- **[Part 3 — Follow a practical QA workflow](https://youtu.be/EHITM9zFefI):** context preparation, story input, artifact review and browser validation using a sample application.
+- [Earlier extended demonstration](https://youtu.be/o8rkB_uJlVk): an older walkthrough; start with Parts 2 and 3 for the newer presentation.
+
+The following is an illustrative conversation, not an execution report or a promise of a particular number of scenarios or passing tests:
 
 ```
 You:     @QAForge Manager
@@ -75,13 +79,13 @@ Reporter:  Final report saved. Xray XML ready for Jira import.
 
 | The old way | QAForge |
 |------------|---------|
-| Write test analysis manually (2–4 hours) | Analyst agent — 2 minutes |
-| Write test cases from scratch every story | Test Case Generator — 3 minutes |
-| Chase down test data per environment | Data Resolver — automated, live data |
-| Write Playwright/Selenium code by hand | Automation Engineer — generated, fits existing framework |
-| Validation is a mental checklist | Validator — every AC mapped, every gap flagged |
-| Report is a copy-paste from Jira | Reporter — structured, audit-ready, Xray-importable |
-| Each engineer does this differently | QAForge — consistent across every engineer, every story |
+| Repeatedly prepare story analysis | Review and refine agent-drafted scenarios |
+| Write test cases from a blank page | Start from structured drafts grounded in project context |
+| Chase down test data per environment | Use authorized sources and make missing data explicit |
+| Write automation boilerplate by hand | Review generated code against your framework, then run it |
+| Keep coverage in a mental checklist | Inspect explicit acceptance-criteria mappings and gaps |
+| Assemble reports from scattered notes | Review structured findings and supporting evidence |
+| Repeat project explanations | Maintain reusable context and technical instructions |
 
 ---
 
@@ -94,9 +98,9 @@ Reporter:  Final report saved. Xray XML ready for Jira import.
 
 ---
 
-## Works With Any Tech Stack
+## Adapt the Workflow to Your Stack
 
-QAForge ships with four skill packs covering the most common testing environments:
+QAForge includes four skill packs. Review and configure the relevant pack for your environment before execution:
 
 | Tech Stack | Use Case | Skill Pack |
 |-----------|----------|------------|
@@ -105,16 +109,16 @@ QAForge ships with four skill packs covering the most common testing environment
 | PostgreSQL / MySQL / SQL Server | Direct DB verification + ETL validation | [`skills/database-sql`](skills/database-sql/README.md) |
 | AWS SQS + S3 + Lambda + DynamoDB | Cloud pipeline testing | [`skills/aws-cloud`](skills/aws-cloud/README.md) |
 
-The **Core Engine** never changes. The **Skill Layer** adapts to your stack. The **Context Layer** teaches the agents your specific project.
+The **Core Engine** defines the shared workflow. The **Skill Layer** supplies stack-specific instructions. The **Context Layer** supplies project facts and business rules. Maintain these files as your project evolves; providing context does not permanently train the underlying model.
 
 ---
 
 ## Quick Start
 
 ### Prerequisites
-- VS Code (latest stable)
-- GitHub Copilot extension (active subscription)
-- Node.js >= 18
+- VS Code with Copilot access and custom agents enabled under your organization's policy
+- Tools and permissions required by your chosen skill pack
+- For Node-based examples, check their package requirements and the runtime supported by the dependencies you install; the repository declares Node.js >= 18
 
 ### Deploy in 3 Steps
 
@@ -123,7 +127,7 @@ The **Core Engine** never changes. The **Skill Layer** adapts to your stack. The
 git clone https://github.com/mdrasul/qaforge.git
 cd qaforge
 
-# 2. Open in VS Code — all 16 agents are auto-discovered immediately
+# 2. Open in VS Code and check the Copilot agent picker
 code .
 
 # 3. Copy the context template and fill it in for your project
@@ -134,10 +138,35 @@ cp core/templates/PROJECT_CONTEXT.template.md PROJECT_CONTEXT.md
 
 ### Run Your First Story
 
-1. Open Copilot Chat in VS Code (`Cmd+Shift+I`)
-2. Fill in `core/templates/INPUT_STORY_TEMPLATE.md` with your story
-3. Type `@QAForge Manager` and paste your filled template
-4. Follow the approval gates
+1. **Prepare context.** Follow the questions in [the project context template](core/templates/PROJECT_CONTEXT.template.md): application purpose, users, business rules and scope. Save your approved details in `PROJECT_CONTEXT.md`.
+2. **Select the AI Manager agent.** Choose QAForge Manager in Copilot's agent picker. Ask it to read the context and summarize its understanding before starting work. Correct missing or misunderstood facts.
+3. **Provide one story.** Follow [the story input template](core/templates/INPUT_STORY_TEMPLATE.md). Paste approved text into chat, or save it as a workspace file such as `STORY_INPUT.md` and ask the AI Manager agent to read that file.
+4. **Review before proceeding.** Open the generated artifacts, check assumptions and expected results, and request changes where necessary. Approve only the next agreed phase. Decide separately whether reusable automation is appropriate.
+
+Example context prompt:
+
+```text
+Read PROJECT_CONTEXT.md. Summarize the application, user roles and business
+rules. Identify missing information without guessing. Do not start story
+analysis or execute tests yet; wait for my review.
+```
+
+Example first-story prompt:
+
+```text
+Read STORY_INPUT.md using the reviewed project context. Start with story
+analysis and proposed test coverage. Identify ambiguities and assumptions.
+Keep approval gates enabled and wait for my review before the next phase.
+Do not execute tests or change application code in this step.
+```
+
+`STORY_INPUT.md` is an example name for your completed story file, not a separate bundled template.
+
+### Protect Project Information
+
+Use only company-approved AI accounts, tools and data-sharing policies. Start with synthetic examples when permission is unclear. Exclude credentials, tokens, personal/customer data and restricted company details. Sanitizing a document does not itself authorize sharing it.
+
+A local file may be sent to the configured AI service when an agent reads it; a path is not a privacy boundary. Keep private context out of public Git commits and use approved secret-management mechanisms instead of storing passwords in prompts or context files. Limit tool permissions and review proposed actions as well as their results.
 
 **Full guide:** [docs/getting-started.md](docs/getting-started.md) | **Troubleshooting:** [docs/troubleshooting.md](docs/troubleshooting.md)
 
@@ -147,7 +176,7 @@ cp core/templates/PROJECT_CONTEXT.template.md PROJECT_CONTEXT.md
 
 ```
 qaforge/
-├── .github/agents/          ← All agents — auto-discovered by VS Code on clone
+├── .github/agents/          ← Custom agent definitions for Copilot
 ├── core/                    ← Templates and engine reference docs
 ├── skills/                  ← Skill pack docs and code templates
 ├── examples/                ← Reference implementations per stack
@@ -162,13 +191,13 @@ See [core/README.md](core/README.md) for agent details and [docs/](docs/) for fu
 
 ```
 ┌─────────────────────────────────────────┐
-│  CONTEXT LAYER  — Your PROJECT_CONTEXT  │  ← You write this once
+│  CONTEXT LAYER  — Your PROJECT_CONTEXT  │  ← Maintain verified facts
 │  (domain knowledge, URLs, schemas)      │
 ├─────────────────────────────────────────┤
 │  SKILL LAYER    — Your Tech Stack       │  ← Pick from the skills library
 │  (playwright / api-rest / database-sql / aws-cloud)  │
 ├─────────────────────────────────────────┤
-│  CORE ENGINE    — Universal Agents      │  ← Never changes
+│  CORE ENGINE    — Universal Agents      │  ← Shared workflow
 │  (Manager, Analyst, TC Gen, etc.)       │
 └─────────────────────────────────────────┘
 ```
@@ -179,11 +208,19 @@ Read the full design: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## The Approval Gate Philosophy
 
-QAForge does not run autonomously end-to-end. Every major step produces an artifact and **pauses for your review**.
+The default governed workflow uses approval checkpoints between major phases. **Keep them enabled**, inspect the artifacts and request changes when needed. Prompt-based gates are not a security boundary: restrict tool access and retain your organization's approval controls.
 
 This is intentional. AI moves fast. Judgment makes it right.
 
-You are always in control. The agents eliminate the writing work. You provide the thinking.
+Agents help prepare the work. You remain responsible for reviewing evidence and deciding whether to proceed.
+
+## Get Practical Setup Help
+
+Start independently with the templates and walkthroughs above. If you would like one-on-one help with setup, project context or applying the workflow to your QA tasks, visit [Test Engineer PRO](https://www.testengineerpro.com/) and use WhatsApp to request a session.
+
+Suggested message: “Hi Rasul, I'd like a one-on-one session for QAForge setup and project context. I need help with [brief non-confidential description]. My preferred time and time zone are [details].”
+
+Do not send credentials or confidential employer documents. Session scope and availability are arranged directly with Rasul.
 
 ---
 
@@ -193,7 +230,7 @@ QAForge is designed to grow through community-contributed skill packs.
 
 If you've adapted QAForge for a new tech stack (GraphQL, Kafka, mobile, Kubernetes, SAP, etc.), contribute it back as a Skill Pack. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-**The more skill packs exist, the more stacks QAForge covers — without changing the core engine.**
+New skill packs can extend the workflow to additional stacks; contributions need review and validation.
 
 ---
 
@@ -208,4 +245,4 @@ MIT — free to use, modify, and distribute. See [LICENSE](LICENSE).
 **MD Rasul** — Senior SDET / Automation Architect
 10+ years building production QA automation systems across enterprise, cloud, and web platforms.
 
-> *"I built this because I was tired of watching talented QA engineers spend 80% of their time writing documents instead of solving testing problems. QAForge gives that time back."*
+The goal is to reduce repetitive preparation so engineers can focus on testing decisions, investigation and evidence.
